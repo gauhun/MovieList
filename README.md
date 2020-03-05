@@ -1,4 +1,4 @@
-# movies_list
+# MovieList
 
 A new Flutter project.
 
