@@ -2,6 +2,16 @@
 
 A new Flutter project.
 
+Shots of the app
+# Shot 1
+![](images/movie1.png)
+# Shot 2
+![](images/movie2.png)
+# Shot 3
+![](images/movie3.png)
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
