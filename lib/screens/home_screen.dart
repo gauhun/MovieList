@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_list/blocPattern/movieBloc.dart';
 import 'package:movies_list/blocPattern/movieRepo.dart';
 import 'package:movies_list/screens/movie_details.dart';
@@ -24,7 +25,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Moives List'),
+        backgroundColor: Color(0xff1A242E),
+        centerTitle: true,
+        title: Text(
+          'Movies List',
+          style: GoogleFonts.sansita(fontSize: 30),
+        ),
       ),
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
@@ -40,7 +46,9 @@ class _HomePageState extends State<HomePage> {
             return Text('Error');
           }
         },
+        
       ),
+      backgroundColor: Colors.grey[300]
     );
   }
 }
@@ -64,10 +72,13 @@ Widget _buildMovieList(List<Results> results) {
           leading: Container(
             height: 200,
             width: 100,
-            child: Image.network(
-                'https://image.tmdb.org/t/p/w500/${results[index].backdropPath}'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                  'https://image.tmdb.org/t/p/w500/${results[index].backdropPath}',fit: BoxFit.cover),
+            ),
           ),
-          title: Text(results[index].title),
+          title: Text(results[index].title,style: GoogleFonts.carterOne(fontSize: 20),),
           subtitle: Text(results[index].title),
         ),
         onTap: () {

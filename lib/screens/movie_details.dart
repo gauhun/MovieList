@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_list/blocPattern/videoBloc.dart';
 import 'package:movies_list/blocPattern/videoRepo.dart';
 import '../blocPattern/videoModel.dart';
@@ -14,26 +15,31 @@ class MovieDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     videoBloc.add(FetchVideoEvent(results.id.toString()));
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Movies Details'),
-      ),
-      body: BlocBuilder<VideoBloc, VideoState>(
-        bloc: videoBloc,
-        builder: (context, state) {
-          if (state is VideoInitialState) {
-            return _buildLoading();
-          } else if (state is VideoLoadingState) {
-            return _buildLoading();
-          } else if (state is VideoLoadedState) {
-            return _buildMovieDetailBody(state.results[0], results);
-          } else if (state is VideoErrorState) {
-            return _buildErrorUi(state.errMsg);
-          } else {
-            return Text('Error');
-          }
-        },
-      ),
-    );
+        appBar: AppBar(
+          backgroundColor: Color(0xff1A242E),
+          centerTitle: true,
+          title: Text(
+            'Movies Details',
+            style: GoogleFonts.sansita(fontSize: 30),
+          ),
+        ),
+        body: BlocBuilder<VideoBloc, VideoState>(
+          bloc: videoBloc,
+          builder: (context, state) {
+            if (state is VideoInitialState) {
+              return _buildLoading();
+            } else if (state is VideoLoadingState) {
+              return _buildLoading();
+            } else if (state is VideoLoadedState) {
+              return _buildMovieDetailBody(state.results[0], results);
+            } else if (state is VideoErrorState) {
+              return _buildErrorUi(state.errMsg);
+            } else {
+              return Text('Error');
+            }
+          },
+        ),
+        backgroundColor: Colors.grey[300]);
   }
 }
 
@@ -52,14 +58,14 @@ Widget _buildMovieDetailBody(Resultsv resultv, Results result) {
     padding: const EdgeInsets.all(15.0),
     child: Center(
       child: Container(
-        height: 320,
+        height: 400,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Text(
                 'Scrollable Content',
-                style: TextStyle(
-                    fontSize: 18,
+                style: GoogleFonts.carterOne(
+                    fontSize: 20,
                     color: Colors.red,
                     fontWeight: FontWeight.w500),
               ),
@@ -69,8 +75,10 @@ Widget _buildMovieDetailBody(Resultsv resultv, Results result) {
               Container(
                 height: 200,
                 width: double.infinity,
-                child: Image.network(
-                    'https://image.tmdb.org/t/p/w500/${result.backdropPath}'),
+                child: ClipRRect(borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                      'https://image.tmdb.org/t/p/w500/${result.backdropPath}'),
+                ),
               ),
               SizedBox(
                 height: 10,
@@ -79,10 +87,9 @@ Widget _buildMovieDetailBody(Resultsv resultv, Results result) {
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
                   resultv.name,
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.carterOne(fontSize: 20),
                 ),
               ),
-
               SizedBox(
                 height: 10,
               ),
@@ -90,10 +97,9 @@ Widget _buildMovieDetailBody(Resultsv resultv, Results result) {
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
                   'Site : ${resultv.site}',
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.carterOne(fontSize: 20),
                 ),
               ),
-
               SizedBox(
                 height: 10,
               ),
@@ -101,7 +107,7 @@ Widget _buildMovieDetailBody(Resultsv resultv, Results result) {
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
                   'Quality : ${resultv.size}',
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.carterOne(fontSize: 20),
                 ),
               ),
             ],
